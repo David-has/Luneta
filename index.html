@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ro" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lunetă – observator astronomic</title>
+<meta name="description" content="Lunetă: seri de observare cu telescoape, planetariu și ateliere. Noaptea vezi planetele, ziua vezi Soarele în siguranță.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="top"><div class="wrap bar">
+  <a class="brand" href="#sus">Lunetă</a>
+  <nav><a href="#programe">Programe</a><a href="#ghid">Ghid</a><a href="#bilete">Bilete</a><a href="#contact">Contact</a></nav>
+  <button class="mode" id="mode" role="switch" aria-checked="true" aria-label="Schimbă între noapte și zi">
+    <span class="opt o-dark">Noapte</span><span class="opt o-light">Zi</span><span class="thumb"></span>
+  </button>
+</div></header>
+
+<main id="sus">
+<section class="hero"><div class="wrap hgrid">
+  <div class="copy">
+    <h1 id="h1"></h1>
+    <p id="lead" class="lead"></p>
+    <div class="cta"><a class="btn" href="#programe" id="cta1"></a><a class="btn ghost" href="#contact">Rezervă un loc</a></div>
+  </div>
+  <div class="stage" aria-hidden="true">
+    <div class="glow"></div>
+    <div class="arch">
+      <svg class="scene" viewBox="0 0 480 560">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="sk1"/><stop offset="1" class="sk2"/></linearGradient>
+          <radialGradient id="mglow"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="480" height="560" fill="url(#sky)"/>
+        <g class="stars" id="stars"></g>
+        <path class="shoot" d="M0 0l70-26"/>
+        <g class="sun">
+          <circle class="raysc" cx="340" cy="170" r="64"/>
+          <circle class="sunc" cx="340" cy="170" r="44"/>
+        </g>
+        <g class="moon">
+          <circle cx="340" cy="170" r="84" fill="url(#mglow)"/>
+          <circle class="moonc" cx="340" cy="170" r="46"/>
+          <circle class="crater" cx="324" cy="158" r="9"/><circle class="crater" cx="356" cy="186" r="12"/><circle class="crater" cx="334" cy="192" r="5"/>
+        </g>
+        <g class="clouds" id="clouds"></g>
+        <path class="m1" d="M0 450C90 400 180 440 270 410S420 400 480 420V560H0z"/>
+        <path class="m2" d="M0 490C110 450 210 500 320 470S440 470 480 480V560H0z"/>
+        <g class="obs" transform="translate(120 438)">
+          <rect class="obase" x="-42" y="8" width="84" height="52" rx="4"/>
+          <path class="odome" d="M-42 8a42 42 0 0 1 84 0z"/>
+          <rect class="slit" x="-6" y="-33" width="12" height="41"/>
+          <g class="tube"><rect class="tubec" x="-5" y="-66" width="10" height="52" rx="3"/><rect class="lens" x="-7" y="-70" width="14" height="8" rx="2"/></g>
+          <rect class="win" x="-9" y="26" width="18" height="24" rx="2"/>
+        </g>
+      </svg>
+    </div>
+    <div class="floatchip" id="chip"></div>
+  </div>
+</div></section>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="marquee"></div></div>
+
+<section class="s1"><div class="wrap stats">
+  <div class="stat reveal"><span class="num" data-to="3">0</span><p>telescoape pentru vizitatori</p></div>
+  <div class="stat reveal"><span class="num" data-to="120">0</span><span class="plus">+</span><p>de seri de observare pe an</p></div>
+  <div class="stat reveal"><span class="num" data-to="49" data-dec="1">0</span><p>nota medie din 5</p></div>
+  <div class="stat reveal"><span class="num" data-to="12">0</span><p>persoane, cel mult, la un telescop</p></div>
+</div></section>
+
+<section class="s2" id="programe"><div class="wrap">
+  <h2 class="reveal" id="dtitle"></h2>
+  <p class="sub reveal" id="dsub"></p>
+  <div class="tabs reveal" id="tabs" role="tablist"></div>
+  <div class="dests" id="dests"></div>
+</div></section>
+
+<section class="s3" id="ghid"><div class="wrap itin">
+  <div class="map reveal">
+    <svg viewBox="0 0 480 360" id="mapsvg" role="img" aria-label="Schemă a traseului">
+      <path class="route-bg" d="M30 290C110 120 170 330 240 200S380 70 450 120"/>
+      <path class="route" id="route" d="M30 290C110 120 170 330 240 200S380 70 450 120"/>
+      <g id="stopsg"></g>
+      <text class="jet" id="jet">✦</text>
+    </svg>
+  </div>
+  <div>
+    <h2 class="reveal" id="ititle"></h2>
+    <p class="sub reveal" id="isub"></p>
+    <ol class="stops" id="stops"></ol>
+    <p class="price total reveal" id="itotal"></p>
+  </div>
+</div></section>
+
+<section class="s4" id="bilete"><div class="wrap">
+  <h2 class="reveal">Bilete și abonamente</h2>
+  <p class="sub reveal">Prețurile includ ghidul. Copiii sub 5 ani intră gratuit, însoțiți de un adult.</p>
+  <div class="plans">
+    <article class="plan reveal"><h3>Seară de observare</h3><p class="price">45 lei<small>/ persoană</small></p>
+      <ul><li>90 de minute la telescop</li><li>Ghid și ceai cald</li><li>Reprogramare dacă e înnorat</li></ul><a class="btn ghost" href="#contact">Alege</a></article>
+    <article class="plan hot reveal"><span class="badge">Cel mai ales</span><h3>Pachet familie</h3><p class="price">140 lei<small>/ 2 adulți + 2 copii</small></p>
+      <ul><li>O seară sau o vizită de zi</li><li>Planetariu inclus</li><li>Poză cu Luna, pe telefon</li></ul><a class="btn" href="#contact">Alege</a></article>
+    <article class="plan reveal"><h3>Abonament anual</h3><p class="price">390 lei<small>/ 12 luni</small></p>
+      <ul><li>10 seri la alegere</li><li>Acces prioritar la evenimente</li><li>10% la ateliere</li></ul><a class="btn ghost" href="#contact">Alege</a></article>
+  </div>
+</div></section>
+
+<section class="s1" id="cum"><div class="wrap two">
+  <div class="reveal"><h2>Cum decurge vizita</h2><p>Nu trebuie să știi nimic despre astronomie. Ghidul îți explică tot, pe înțelesul tuturor.</p></div>
+  <ol class="timeline" id="timeline">
+    <li class="reveal"><time>Pasul 1</time><b>Rezervi un loc</b><span>Alegi programul și ora. Primești confirmarea imediat.</span></li>
+    <li class="reveal"><time>Pasul 2</time><b>Sosești cu 15 minute înainte</b><span>Îți arătăm cupola și îți explicăm cum funcționează telescopul.</span></li>
+    <li class="reveal"><time>Pasul 3</time><b>Observi cu ghidul</b><span>Fiecare ajunge la ocular, pe rând, fără grabă.</span></li>
+    <li class="reveal"><time>Pasul 4</time><b>Pleci cu o poză</b><span>Facem o fotografie prin telescop, pe care o primești pe telefon.</span></li>
+  </ol>
+</div></section>
+
+<section class="s2"><div class="wrap">
+  <h2 class="reveal">Ce spun vizitatorii</h2>
+  <div class="quotes">
+    <figure class="reveal"><blockquote>Am văzut inelele lui Saturn cu ochii mei. Fiica mea a tăcut un minut întreg, ceea ce nu se întâmplă des.</blockquote><figcaption><i>A</i>Alina P.</figcaption></figure>
+    <figure class="reveal"><blockquote>Ghidul a explicat totul fără cuvinte complicate. Am plecat vrând să ne întoarcem luna viitoare.</blockquote><figcaption><i>D</i>Dan M.</figcaption></figure>
+    <figure class="reveal"><blockquote>Atelierul cu rachete a fost cel mai bun weekend al copiilor. Și al nostru, de fapt.</blockquote><figcaption><i>S</i>Simona T.</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="s3"><div class="wrap narrow">
+  <h2 class="reveal">Întrebări frecvente</h2>
+  <details class="reveal"><summary>Ce se întâmplă dacă e înnorat?</summary><p>Mutăm seara în planetariu sau te reprogramăm gratuit, în următoarele 3 luni.</p></details>
+  <details class="reveal"><summary>Cum mă îmbrac?</summary><p>Cald, chiar și vara. Cupola nu e încălzită, iar nopțile sunt reci.</p></details>
+  <details class="reveal"><summary>Pot veni cu copii mici?</summary><p>Da. Programele „Micul astronom” și „Povești sub cupolă” sunt făcute pentru ei.</p></details>
+  <details class="reveal"><summary>Este locul accesibil în scaun cu rotile?</summary><p>Da, avem rampă și un telescop la înălțime potrivită. Spune-ne la rezervare.</p></details>
+</div></section>
+
+<section class="s4" id="contact"><div class="wrap two">
+  <div class="reveal">
+    <h2>Rezervă un loc</h2>
+    <dl class="info">
+      <dt>Program seara</dt><dd>Marți – Duminică: 19:00 – 23:00</dd>
+      <dt>Program ziua</dt><dd>Sâmbătă – Duminică: 10:00 – 16:00</dd>
+      <dt>Adresă</dt><dd>Dealul Cerului 1</dd>
+      <dt>Telefon</dt><dd>0700 000 000</dd>
+      <dt>Email</dt><dd>contact@luneta.example</dd>
+    </dl>
+  </div>
+  <form id="rez" class="form reveal">
+    <h3>Alege programul</h3>
+    <label>Nume<input name="n" required autocomplete="name"></label>
+    <label>Program<select name="dest" id="dsel"></select></label>
+    <div class="r2"><label>Data<input type="date" name="d" required></label>
+    <label>Persoane<select name="p"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></label></div>
+    <button class="btn" type="submit">Trimite rezervarea</button>
+    <p id="rmsg" role="status"></p>
+  </form>
+</div></section>
+</main>
+
+<footer><div class="wrap">© 2026 Lunetă. Site demonstrativ: programele, prețurile și rezervările nu sunt reale.</div></footer>
+<script src="script.js"></script>
+</body>
+</html>
